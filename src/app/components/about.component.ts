@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-Component({
+@Component({
   selector: 'about',
   template: `
     <div>This is the "About" page</div>
