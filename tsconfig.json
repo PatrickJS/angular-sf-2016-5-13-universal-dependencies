@@ -10,7 +10,8 @@
   "exclude": [
     "typings/main.d.ts",
     "typings/main",
-    "node_modules"
+    "node_modules",
+    "universal-di.js"
   ],
   "compileOnSave": false,
   "buildOnSave": false,
