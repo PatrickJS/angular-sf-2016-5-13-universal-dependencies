@@ -5,6 +5,6 @@ import {provide} from '@angular/core';
 // Store -> StoreBackend == BrowserBackend
 export const BROWSER_STORE_PROVIDERS = [
   BrowserBackend,
-  provide(StoreBackend, {useClass: BrowserBackend}),
+  {provide: StoreBackend, useClass: BrowserBackend},
   Store
 ];
