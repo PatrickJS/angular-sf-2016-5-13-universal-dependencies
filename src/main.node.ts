@@ -1,6 +1,5 @@
 // Angular 2 Universal
 import {
-  provide,
   enableProdMode,
   REQUEST_URL,
   ORIGIN_URL,
@@ -18,7 +17,7 @@ enableProdMode();
 
 export function ngApp(req, res) {
 // debugging only
-  if (req.query.client === 'false') {
+  if (req.query.server === 'false') {
     return res.sendFile('/index.html', {root: __dirname});
   }
 //
@@ -30,11 +29,11 @@ export function ngApp(req, res) {
   let config: ExpressEngineConfig = {
     directives: [ App ],
     platformProviders: [
-      provide(ORIGIN_URL, {useValue: originUrl}),
-      provide(BASE_URL, {useValue: baseUrl}),
+      {provide: ORIGIN_URL, useValue: originUrl},
+      {provide: BASE_URL, useValue: baseUrl},
     ],
     providers: [
-      provide(REQUEST_URL, {useValue: url}),
+      {provide: REQUEST_URL, useValue: url},
       ...NODE_ROUTER_PROVIDERS,
       ...NODE_HTTP_PROVIDERS,
 

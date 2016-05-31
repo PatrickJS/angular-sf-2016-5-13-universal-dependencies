@@ -1,73 +1,10 @@
-import {Component, Directive, ElementRef, Renderer} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Http} from '@angular/http';
 
-import {isBrowser} from 'angular2-universal';
+import {XLarge} from './directives/x-large.directive';
 
-import {Store} from '../universal-store/src/store';
-
-/////////////////////////
-// ** Example Directive
-// Notice we don't touch the Element directly
-@Directive({
-  selector: '[x-large]'
-})
-export class XLarge {
-  constructor(element: ElementRef, renderer: Renderer) {
-    // ** IMPORTANT **
-    // we must interact with the dom through -Renderer-
-    // for webworker/server to see the changes
-    renderer.setElementStyle(element.nativeElement, 'fontSize', 'x-large');
-    // ^^
-  }
-}
-
-/////////////////////////
-// ** Example Components
-@Component({
-  selector: 'home',
-  template: `
-    <div>This is the "Home" page</div>
-
-    <form (ngSubmit)="onSubmit()">
-      <label>
-        name:
-        <input type="text" [(ngModel)]="data">
-      </label>
-    </form>
-
-    <pre>this.store.get('data') = {{ store.get('data') | json }}</pre>
-  `
-})
-export class Home {
-  data = '';
-  store = {
-    get(prop) {
-      return isBrowser ? localStorage.getItem(prop) : null;
-    },
-    set(prop, value) {
-      return isBrowser ? localStorage.setItem(prop, value) : null;
-    }
-  };
-  constructor(
-    // public store: Store
-  ) {
-
-  }
-
-  onSubmit() {
-    this.store.set('data', this.data);
-    this.data = '';
-  }
-}
-
-@Component({
-  selector: 'about',
-  template: `
-    <div>This is the "About" page</div>
-  `
-})
-export class About { }
+import {Home, About} from './components';
 
 /////////////////////////
 // ** MAIN APP COMPONENT **
@@ -137,14 +74,14 @@ export class App {
   constructor(public http: Http) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.server = 'This was rendered from the server!';
-    }, 10);
-
-    this.http.get('/data.json')
-      .subscribe(res => {
-        this.data = res.json();
-      });
+    // setTimeout(() => {
+    //   this.server = 'This was rendered from the server!';
+    // }, 10);
+    //
+    // this.http.get('/data.json')
+    //   .subscribe(res => {
+    //     this.data = res.json();
+    //   });
   }
 
 }
