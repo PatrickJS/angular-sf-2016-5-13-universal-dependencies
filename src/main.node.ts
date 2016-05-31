@@ -15,6 +15,10 @@ import {NODE_STORE_PROVIDERS} from './universal-store/src/node';
 
 enableProdMode();
 
+
+
+
+
 export function ngApp(req, res) {
 // debugging only
   if (req.query.server === 'false') {

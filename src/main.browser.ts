@@ -32,6 +32,9 @@ export function ngApp() {
 
 
 
+
+
+
 if (!getParameterByName('client')) {
   ngApp();
 }
