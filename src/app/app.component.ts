@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Http} from '@angular/http';
 
 import {XLarge} from './directives/x-large.directive';
+import {isBrowser} from 'angular2-universal';
 
 import {Home, About} from './components';
 
@@ -30,7 +31,7 @@ import {Home, About} from './components';
   `],
   template: `
   <h3 id="universal">
-    Angular 2 Universal
+    Angular 2 Universal - {{ isBrowser ? 'BROWSER' : 'SERVER' }} rendered
   </h3>
 
   <nav>
@@ -44,7 +45,12 @@ import {Home, About} from './components';
         <span x-large>Universal JavaScript {{ title }}!</span>
       </div>
 
-      Two-way binding: <input type="text" [value]="title" (input)="title = $event.target.value" autofocus>
+      Two-way binding:
+      <input
+        type="text"
+        [value]="title"
+        (input)="title = $event.target.value"
+        autofocus>
       <br><br>
 
       <strong>Async data call return value:</strong>
@@ -67,6 +73,7 @@ import {Home, About} from './components';
   { path: '/**', redirectTo: ['Home'] }
 ])
 export class App {
+  isBrowser = isBrowser;
   title: string = 'ftw';
   data = {};
   server: string;
@@ -77,7 +84,7 @@ export class App {
     // setTimeout(() => {
     //   this.server = 'This was rendered from the server!';
     // }, 10);
-    //
+
     // this.http.get('/data.json')
     //   .subscribe(res => {
     //     this.data = res.json();
