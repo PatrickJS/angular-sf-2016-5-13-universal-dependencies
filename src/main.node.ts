@@ -45,7 +45,9 @@ export function ngApp(req, res) {
 
     ],
     async: true,
-    preboot: false // { appRoot: 'app' } // your top level app component selector
+    // preboot: true,
+
+    preboot: req.query.preboot === 'true' ? true : false,
   };
 
   res.render('index', config);

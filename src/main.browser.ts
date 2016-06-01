@@ -36,7 +36,13 @@ export function ngApp() {
 
 
 if (!getParameterByName('client')) {
-  ngApp();
+  if (getParameterByName('delay')) {
+    setTimeout(() => {
+      ngApp();
+    }, 2000);
+  } else {
+    ngApp();
+  }
 }
 
 
